@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Burrow</title>
+
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <script type="module" src="burrow.mjs"></script>
+  </head>
+
+  <body>
+
+    <main>
+
+      <dialog open>
+        <h1>Burrow</h1>
+
+        <nav>
+          <button>Home</button>
+          <button>Back</button>
+          <button>Forward</button>
+          <button>Reload</button>
+        </nav>
+
+        <div>
+          <input type="text" placeholder="Enter URL or search query" value="gopher://hole.din.gy/" />
+          <button>Go</button>
+        </div>
+
+        <iframe src="https://www.duckduckgo.com" title="Burrow Browser"></iframe>
+
+    </main>
+
+  </body>
+</html>

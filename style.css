@@ -1,0 +1,90 @@
+html {
+  --theme-color: #3f5415
+}
+
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "mc-main-regular";
+  src: url("font/macs-minecraft/mac's Minecraft.woff2");
+}
+
+body, button {
+  font-family: "mc-main-regular", monospace, sans-serif;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url('bg.png');
+
+  height: 100%;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+button {
+  background: linear-gradient(180deg, #fff 0%, #ccc 100%);
+  border: 0;
+
+  &:hover {
+    background: linear-gradient(180deg, #fff 0%, #bbb 100%);
+  }
+}
+
+dialog {
+
+  padding: 0;
+
+  width: 100%;
+  max-width: 800px;
+  min-height: 800px;
+
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+  display: flex;
+  flex-direction: column;
+  
+
+  h1 {
+    margin: 0;
+    padding: 0;
+    border-bottom: 2px solid #000;
+    font-weight: normal;
+    padding: 4px;
+    font-size: 16px;
+    background: var(--theme-color);
+    color: #fff;
+  }
+
+  nav {
+
+    display: flex;
+    border-bottom: 1px solid #000;
+    background: linear-gradient(180deg, #fff 0%, #ccc 100%);
+
+    button {
+      padding: 4px 0;
+      height: 64px;
+      width: 64px;
+      font-size: 10px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+
+    }
+
+
+  }
+
+}
