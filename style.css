@@ -11,7 +11,7 @@ html {
   src: url("font/macs-minecraft/mac's Minecraft.woff2");
 }
 
-body, button {
+body, button, input {
   font-family: "mc-main-regular", monospace, sans-serif;
 }
 
@@ -37,7 +37,7 @@ button {
   border: 0;
 
   &:hover {
-    background: linear-gradient(180deg, #fff 0%, #bbb 100%);
+    background-color: linear-gradient(180deg, #fff 0%, #bbb 100%);
   }
 }
 
@@ -54,7 +54,7 @@ dialog {
 
   display: flex;
   flex-direction: column;
-  
+
 
   h1 {
     margin: 0;
@@ -70,7 +70,6 @@ dialog {
   nav {
 
     display: flex;
-    border-bottom: 1px solid #000;
     background: linear-gradient(180deg, #fff 0%, #ccc 100%);
 
     button {
@@ -81,10 +80,54 @@ dialog {
       display: flex;
       align-items: flex-end;
       justify-content: center;
+      background-repeat: no-repeat;
+      background-position: center;
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+      background-image: var(--icon);
 
+      &.back {
+        --icon: url('icons/back.png');
+      }
+      &.forward {
+        --icon: url('icons/forward.png');
+      }
+      &.home {
+        --icon: url('icons/home.png');
+      }
+      &.reload {
+        --icon: url('icons/reload.png');
+      }
+      &:hover {
+
+      }
+
+    }
+    img {
+      margin-left: auto;
+      height: 64px;
+      width: 64px;
     }
 
 
+  }
+
+  .address-bar {
+    display: flex;
+
+    padding: 4px;
+    background: #ccc;
+
+    input {
+      flex: 1;
+      border: 0;
+      padding: 4px;
+    }
+  }
+
+  iframe {
+    flex: 1;
+    border: 0;
   }
 
 }
