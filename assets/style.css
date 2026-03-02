@@ -1,5 +1,5 @@
 html {
-  --theme-color: #3f5415
+  --theme-color: #43a889;
 }
 
 * {
@@ -33,15 +33,16 @@ main {
 }
 
 button {
-  background: linear-gradient(180deg, #fff 0%, #ccc 100%);
+  --gradient: linear-gradient(180deg, #fff 0%, #ccc 100%);
+  background: --gradient;
   border: 0;
 
-  &:hover {
-    background-color: linear-gradient(180deg, #fff 0%, #bbb 100%);
+ &:hover {
+    --gradient: linear-gradient(180deg, #fff 0%, #bbb 100%);
   }
 }
 
-dialog {
+burrow-window {
 
   padding: 0;
 
@@ -59,7 +60,6 @@ dialog {
   h1 {
     margin: 0;
     padding: 0;
-    border-bottom: 2px solid #000;
     font-weight: normal;
     padding: 4px;
     font-size: 16px;
@@ -80,11 +80,11 @@ dialog {
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      background-repeat: no-repeat;
-      background-position: center;
       image-rendering: crisp-edges;
       image-rendering: pixelated;
-      background-image: var(--icon);
+      background:
+        var(--icon) no-repeat center 16px,
+        var(--gradient);
 
       &.back {
         --icon: url('icons/back.png');
@@ -97,9 +97,6 @@ dialog {
       }
       &.reload {
         --icon: url('icons/reload.png');
-      }
-      &:hover {
-
       }
 
     }
