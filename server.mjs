@@ -36,12 +36,15 @@ async function gopherProxy(req, res) {
 
   try {
 
-    const target = new URL(/** @type {string} */(req.url).slice('/proxy?'.length));
+    const targetUrl = decodeURIComponent(/** @type {string} */(req.url).slice('/proxy/'.length));
+    console.log('-- Proxying gopher request for: ' + targetUrl);
+    const target = new URL(targetUrl);
     await gopherRequest(target, res);
 
   } catch (err) {
 
-    res.statusCode = 200;
+    res.statusCode = 400;
+    res.setHeader('Content-Type', 'application/json; charset=utf-8');
     res.end(JSON.stringify({
       error: err.message
     }));

@@ -21,15 +21,17 @@
           <button class="forward">Forward</button>
           <button class="home">Home</button>
           <button class="reload">Reload</button>
-          <img src="gopher.webp" alt="Gopher Icon" />
+          <img src="gopher-frozen.webp" alt="Gopher Icon" />
         </nav>
 
         <form class="address-bar">
-          <input type="text" placeholder="Enter URL or search query" value="gopher://hole.din.gy/" />
+          <input name="address" type="text" placeholder="Enter URL or search query" value="gopher://hole.din.gy/" />
           <button type="submit">Go</button>
         </form>
 
-        <iframe src="https://www.duckduckgo.com" title="Burrow Browser"></iframe>
+        <div class="content">
+          <p>Welcome to Burrow, the Gopher browser! Enter a Gopher URL or search query above to get started.</p>
+        </div>
 
     </burrow-window>
 

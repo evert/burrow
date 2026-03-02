@@ -48,7 +48,7 @@ burrow-window {
 
   width: 100%;
   max-width: 800px;
-  min-height: 800px;
+  min-height: min(800px, 100%);
 
   border: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -100,7 +100,7 @@ burrow-window {
       }
 
     }
-    img {
+    img, video {
       margin-left: auto;
       height: 64px;
       width: 64px;
@@ -122,9 +122,25 @@ burrow-window {
     }
   }
 
-  iframe {
+  .content {
     flex: 1;
     border: 0;
+    background: #fff;
+
+    padding: 4px;
+
+    font-family: monospace;
+    white-space: pre;
+
+    div {
+      min-height: 1.25em;
+      line-height: 1.25;
+    }
+    .error {
+      background: red;
+      color: white;
+    }
+
   }
 
 }

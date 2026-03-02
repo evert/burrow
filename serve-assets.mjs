@@ -3,6 +3,23 @@ import fs from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
 
 const assetsPath = path.resolve(import.meta.dirname, 'assets');
+const mimeTypes = {
+  '.html': 'text/html; charset=utf-8',
+
+  '.css': 'text/css; charset=utf-8',
+
+  '.png': 'image/png',
+  '.webp': 'image/webp',
+
+  '.js': 'application/javascript; charset=utf-8',
+  '.mjs': 'application/javascript; charset=utf-8',
+
+  '.json': 'application/json; charset=utf-8',
+
+  '.woff2': 'font/woff2',
+};
+
+
 export async function asset(req, res) {
 
   let safePath = path.resolve(assetsPath, decodeURIComponent(req.url).slice(1));
@@ -37,32 +54,13 @@ export async function asset(req, res) {
 
   const extName = path.extname(safePath).toLowerCase();
 
-  switch(extName) {
-    case '.html': 
-      res.setHeader('Content-Type', 'text/html; charset=utf-8');
-      break;
-    case '.js': 
-      res.setHeader('Content-Type', 'application/javascript; charset=utf-8');
-      break;
-    case '.css': 
-      res.setHeader('Content-Type', 'text/css; charset=utf-8');
-      break;
-    case '.json': 
-      res.setHeader('Content-Type', 'application/json; charset=utf-8');
-      break;
-    case '.png': 
-      res.setHeader('Content-Type', 'image/png');
-      break;
-    case '.webp': 
-      res.setHeader('Content-Type', 'image/webp');
-      break;
-
-    default:
-      res.statusCode = 403;
-      res.end('Forbidden');
-      console.warn('Forbidden file type: ' + extName);
-      return;
+  if (!mimeTypes[extName]) {
+    res.statusCode = 403;
+    res.end('Forbidden');
+    console.warn('Forbidden file type: ' + extName);
+    return;
   }
+  res.setHeader('Content-Type', mimeTypes[extName]);
 
   res.statusCode = 200;
   res.setHeader('Content-Length', stat.size);
