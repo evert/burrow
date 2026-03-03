@@ -80,8 +80,10 @@ burrow-window {
       display: flex;
       align-items: flex-end;
       justify-content: center;
+      /*
       image-rendering: crisp-edges;
       image-rendering: pixelated;
+      */
       background:
         var(--icon) no-repeat center 16px,
         var(--gradient);
