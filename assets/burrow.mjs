@@ -2,6 +2,7 @@
 const gopherTypeClassNames = {
   '0': 'text-file',
   '1': 'directory',
+  'h': 'html-link',
   'i': 'info',
 };
 
@@ -188,6 +189,9 @@ function renderDirectory(parentElem, content) {
       }
       case 'i': // info
         lineElem.textContent = display;
+        if (selector === 'TITLE') {
+          lineElem.classList.add('title');
+        }
         break;
       default:
         lineElem.classList.add('error');

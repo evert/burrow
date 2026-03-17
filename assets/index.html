@@ -14,23 +14,26 @@
     <main>
 
       <burrow-window>
-        <h1>Burrow</h1>
 
-        <nav>
-          <button class="back">Back</button>
-          <button class="forward">Forward</button>
-          <button class="home">Home</button>
-          <button class="reload">Reload</button>
-          <img src="gopher-frozen.webp" alt="Gopher Icon" />
-        </nav>
+        <div class="header">
+          <h1>Burrow</h1>
 
-        <form class="address-bar">
-          <input name="address" type="text" placeholder="Enter URL or search query" value="gopher://hole.din.gy/" />
-          <button type="submit">Go</button>
-        </form>
+          <nav>
+            <button class="back">Back</button>
+            <button class="forward">Forward</button>
+            <button class="home">Home</button>
+            <button class="reload">Reload</button>
+            <img src="gopher-frozen.webp" alt="Gopher Icon" />
+          </nav>
+          <form class="address-bar">
+            <input name="address" type="text" placeholder="Enter URL or search query" value="gopher://hole.din.gy/" />
+            <button type="submit">Go</button>
+          </form>
+        </div>
+
+
 
         <div class="content">
-          <p>Welcome to Burrow, the Gopher browser! Enter a Gopher URL or search query above to get started.</p>
         </div>
 
     </burrow-window>
