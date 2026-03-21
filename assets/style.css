@@ -144,8 +144,12 @@ burrow-window {
     word-wrap: break-word;
 
     > * {
-      width: 90ch;
+      width: 100%;
       margin: 0 auto;
+
+      display: flex;
+      flex-direction: row;
+      gap: 4px;
 
       &::before {
         content: "";
@@ -169,10 +173,16 @@ burrow-window {
         content: "🌐";
       }
     }
-
     .error {
+      &::before {
+        content: "⚠️";
+      }
       background: red;
       color: white;
+    }
+    .title {
+      font-size: 125%;
+      font-weight: bold;
     }
 
   }

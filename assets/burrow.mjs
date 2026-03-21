@@ -2,6 +2,7 @@
 const gopherTypeClassNames = {
   '0': 'text-file',
   '1': 'directory',
+  '3': 'error',
   'h': 'html-link',
   'i': 'info',
 };
@@ -38,6 +39,9 @@ class BurrowWindow extends HTMLElement {
     });
     this.addressElem = addressBar.querySelector('input[name="address"]');
     this.loaderElem = this.querySelector('nav img');
+    if (window.location.hash) {
+      this.currentUrl = window.location.hash.slice(1);
+    }
     this.loadURL(this.currentUrl);
 
     this.querySelector('button.back').addEventListener('click', () => {
@@ -170,6 +174,10 @@ function renderDirectory(parentElem, content) {
           const url = link.href;
           parentElem.closest('burrow-window').loadURL(url);
         });
+        break;
+      }
+      case '3': {
+        lineElem.textContent = display;
         break;
       }
       case 'h': {
