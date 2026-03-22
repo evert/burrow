@@ -17,7 +17,8 @@ server.listen(process.env.PORT || 3000, () => {
  */
 async function handle(req, res) {
 
-  console.log('->', req.method, req.url);
+  const ip = req.headers['x-forwarded-for'] ?? req.socket.remoteAddress;
+  console.log('->', ip, req.method, req.url);
   if (req.url?.startsWith('/proxy/')) {
     await gopherProxy(req, res);
   } else {
