@@ -197,7 +197,7 @@ burrow-window {
         content: "💾";
       }
     }
-    .image, .gif {
+    .image, .gif, .png {
       &::before {
         content: "🖼️";
       }
