@@ -77,8 +77,12 @@ export async function gopherRequest(url, res) {
     }
     case 'g': {
       res.setHeader('Content-Type', 'image/gif');
-        break;
-      }
+      break;
+    }
+    case 'p': {
+      res.setHeader('Content-Type', 'image/png');
+      break;
+    }
 
   }
   client.pipe(res);

@@ -11,6 +11,7 @@ const gopherTypeClassNames = {
   'g': 'gif',
   'h': 'html-link',
   'i': 'info',
+  'p': 'png',
   'I': 'image',
 };
 
@@ -171,6 +172,7 @@ async function render(element, gopherType, url) {
       }
       case 'g' : // gif
       case 'I' : // image
+      case 'p': // png. Non-standard but in use
         const img = document.createElement('img');
         img.src = gopherToProxyUrl(url);
         element.replaceChildren(img);
@@ -278,8 +280,9 @@ function renderDirectory(parentElem, content) {
         lineElem.appendChild(link);
         break;
       }
-      case 'g':
-      case 'I': {
+      case 'g': // Gif
+      case 'p' :  // PNG. Non-standard but in use
+      case 'I': { // Image
         const link = document.createElement('a');
         link.href = new URL('gopher://' + host + ':' + port + '/' + type + selector).href;
         link.textContent = display;
