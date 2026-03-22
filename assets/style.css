@@ -197,6 +197,11 @@ burrow-window {
         content: "💾";
       }
     }
+    .pdf {
+      &::before {
+        content: "📕";
+      }
+    }
     .image, .gif, .png {
       &::before {
         content: "🖼️";

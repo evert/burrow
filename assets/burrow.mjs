@@ -13,6 +13,7 @@ const gopherTypeClassNames = {
   'i': 'info',
   'p': 'png',
   'I': 'image',
+  'P': 'pdf',
 };
 
 
@@ -162,7 +163,8 @@ async function render(element, gopherType, url) {
       case '4': // BinHex
       case '5': // DOS binary archive
       case '6': // uuencoded
-      case '9': { // binary file
+      case '9': // binary file
+      case 'P': { // PDF. Unofficial but in use
         const a = document.createElement('a');
         a.href = gopherToProxyUrl(url);
         a.download = url.split('/').pop() || 'download';
@@ -272,7 +274,8 @@ function renderDirectory(parentElem, content) {
       case '4': // BinHex
       case '5': // DOS binary archive
       case '6': // uuencoded
-      case '9': { // binary file
+      case '9': // binary file
+      case 'P': { // PDF. Unofficial but in use
         const link = document.createElement('a');
         link.href = gopherToProxyUrl('gopher://' + host + ':' + port + '/' + type + selector);
         link.textContent = display;
