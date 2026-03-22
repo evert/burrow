@@ -4,6 +4,10 @@ const gopherTypeClassNames = {
   '1': 'directory',
   '3': 'error',
   '7': 'search',
+  '4': 'binary',
+  '5': 'binary',
+  '6': 'binary',
+  '9': 'binary',
   'g': 'gif',
   'h': 'html-link',
   'i': 'info',
@@ -154,6 +158,17 @@ async function render(element, gopherType, url) {
       case '7': // search
         renderDirectory(element, await fetchGopherText(url));
         break;
+      case '4': // BinHex
+      case '5': // DOS binary archive
+      case '6': // uuencoded
+      case '9': { // binary file
+        const a = document.createElement('a');
+        a.href = gopherToProxyUrl(url);
+        a.download = url.split('/').pop() || 'download';
+        a.textContent = 'Download binary file';
+        element.replaceChildren(a);
+        break;
+      }
       case 'g' : // gif
       case 'I' : // image
         const img = document.createElement('img');
@@ -252,6 +267,17 @@ function renderDirectory(parentElem, content) {
           lineElem.classList.add('title');
         }
         break;
+      case '4': // BinHex
+      case '5': // DOS binary archive
+      case '6': // uuencoded
+      case '9': { // binary file
+        const link = document.createElement('a');
+        link.href = gopherToProxyUrl('gopher://' + host + ':' + port + '/' + type + selector);
+        link.textContent = display;
+        link.download = selector.split('/').pop() || display;
+        lineElem.appendChild(link);
+        break;
+      }
       case 'g':
       case 'I': {
         const link = document.createElement('a');

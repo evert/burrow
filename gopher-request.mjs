@@ -49,6 +49,15 @@ export async function gopherRequest(url, res) {
   });
 
   switch(gopherType) {
+    case '4': // BinHex
+    case '5': // DOS binary archive
+    case '6': // uuencoded
+    case '9': { // binary file
+      res.setHeader('Content-Type', 'application/octet-stream');
+      const filename = selector.split('/').pop() || 'download';
+      res.setHeader('Content-Disposition', 'attachment; filename="' + filename + '"');
+      break;
+    }
     case 'I': {
       switch(selector.split('.').slice(-1)[0]) {
         case 'jpg':
