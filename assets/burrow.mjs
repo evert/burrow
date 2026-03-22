@@ -14,12 +14,11 @@ const gopherTypeClassNames = {
 [
   '/gopher.webp',
   '/gopher-frozen.webp',
+  '/gopher-gasp.gif',
 ].forEach(src => {
   const img = new Image();
   img.src = src;
 });
-new Image('/gopher.webp');
-new Image('/gopher-frozen.webp');
 
 class BurrowWindow extends HTMLElement {
 
@@ -57,6 +56,9 @@ class BurrowWindow extends HTMLElement {
     });
     this.querySelector('button.reload').addEventListener('click', () => {
       this.loadURL(this.currentUrl);
+    });
+    this.loaderElem.addEventListener('click', () => {
+      this.loaderElem.src = '/gopher-gasp.gif';
     });
     window.addEventListener('hashchange', (_event) => {
       this.loadURL(window.location.hash.slice(1));

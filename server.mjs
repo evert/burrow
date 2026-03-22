@@ -3,7 +3,6 @@ import http from 'node:http';
 import { asset } from './serve-assets.mjs';
 import { gopherRequest } from './gopher-request.mjs';
 
-
 const server = http.createServer((req, res) => {
   handle(req, res);
 });

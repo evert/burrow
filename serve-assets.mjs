@@ -10,6 +10,7 @@ const mimeTypes = {
 
   '.png': 'image/png',
   '.webp': 'image/webp',
+  '.gif': 'image/gif',
 
   '.js': 'application/javascript; charset=utf-8',
   '.mjs': 'application/javascript; charset=utf-8',
