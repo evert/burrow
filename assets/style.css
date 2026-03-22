@@ -131,7 +131,7 @@ burrow-window {
     border: 0;
     background: #fff;
 
-    padding: 4px;
+    padding: 4px 4px 16px 4px;
 
     font-family: monospace;
     white-space: pre-wrap;
@@ -143,10 +143,16 @@ burrow-window {
     gap: 4px;
     word-wrap: break-word;
 
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
     > * {
       width: 100%;
       margin: 0 auto;
 
+      min-height: 1em;
       display: flex;
       flex-direction: row;
       gap: 4px;
@@ -155,6 +161,12 @@ burrow-window {
         content: "";
         width: 24px;
         display: inline-block;
+      }
+    }
+
+    .info {
+      &::before {
+        display: none;
       }
     }
 
@@ -179,6 +191,16 @@ burrow-window {
       }
       background: red;
       color: white;
+    }
+    .image {
+      &::before {
+        content: "🖼️";
+      }
+    }
+    .search {
+      &::before {
+        content: "🔍";
+      }
     }
     .title {
       font-size: 125%;

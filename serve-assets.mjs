@@ -64,7 +64,7 @@ export async function asset(req, res) {
 
   res.statusCode = 200;
   res.setHeader('Content-Length', stat.size);
-  const fileReadStream = createReadStream(safePath); 
+  const fileReadStream = createReadStream(safePath);
   fileReadStream.pipe(res);
 
 }

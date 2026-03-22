@@ -3,8 +3,10 @@ const gopherTypeClassNames = {
   '0': 'text-file',
   '1': 'directory',
   '3': 'error',
+  '7': 'search',
   'h': 'html-link',
   'i': 'info',
+  'I': 'image',
 };
 
 
@@ -74,8 +76,12 @@ class BurrowWindow extends HTMLElement {
     window.history.pushState({}, '', '/#' + urlObj.toString());
     this.addressElem.value = urlObj.toString();
     this.startLoading();
-    const response = await fetchGopherResource(url);
-    render(this.querySelector('.content'), response.gopherType, response.content);
+    const gopherType = urlObj.pathname.slice(1,2) || '1';
+    render(
+      this.querySelector('.content'),
+      gopherType,
+      url,
+    );
     this.endLoading();
 
   }
@@ -108,7 +114,7 @@ customElements.define('burrow-window', BurrowWindow);
 
 async function fetchGopherResource(url) {
 
-  const resp = await fetch('/proxy/' + encodeURIComponent(url));
+  const resp = await fetch(gopherToProxyUrl(url));
 
   if (!resp.ok) {
     if (resp.headers.get('Content-Type')?.startsWith('application/json')) {
@@ -119,23 +125,33 @@ async function fetchGopherResource(url) {
     }
   }
 
-  const type = new URL(url).pathname.slice(1,2) || '1';
-
-  return {
-    gopherType: type,
-    content: await resp.text()
-  }
+  return resp;
 
 }
 
-function render(element, gopherType, content) {
+async function fetchGopherText(url) {
+
+  return await (await fetchGopherResource(url)).text();
+
+}
+
+function gopherToProxyUrl(gopherUrl) {
+  return '/proxy/' + encodeURIComponent(gopherUrl);
+}
+
+async function render(element, gopherType, url) {
 
   switch(gopherType) {
     case '0': // text file
-      element.textContent = content;
+      element.textContent = await fetchGopherText(url);
       break;
     case '1': // directory
-      renderDirectory(element, content);
+      renderDirectory(element, await fetchGopherText(url));
+      break;
+    case 'I' : // image
+      const img = document.createElement('img');
+      img.src = gopherToProxyUrl(url);
+      element.replaceChildren(img);
       break;
 
     default:
@@ -201,7 +217,18 @@ function renderDirectory(parentElem, content) {
           lineElem.classList.add('title');
         }
         break;
-      default:
+      case 'I': {
+        const link = document.createElement('a');
+        link.href = new URL('gopher://' + host + ':' + port + '/' + type + selector).href;
+        link.textContent = display;
+        lineElem.appendChild(link);
+        link.addEventListener('click', (event) => {
+          event.preventDefault();
+          const url = link.href;
+          parentElem.closest('burrow-window').loadURL(url);
+        });
+        break;
+      } default:
         lineElem.classList.add('error');
         lineElem.textContent = 'Unsupported gopher type: ' + type;
 

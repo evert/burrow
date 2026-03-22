@@ -34,11 +34,36 @@ export async function gopherRequest(url, res) {
     requestLine += '\t' + url.search;
   }
 
-  console.log('Requesting gopher resource: ' + requestLine + ' from ' + host + ':' + port);
+  // console.log('Requesting gopher resource: ' + requestLine + ' from ' + host + ':' + port);
+
   const client = createConnection({ port, host }, () => {
     client.write(requestLine + '\r\n');
   });
 
+  switch(gopherType) {
+    case 'I': {
+      switch(selector.split('.').slice(-1)[0]) {
+        case 'jpg':
+        case 'jpeg':
+          res.setHeader('Content-Type', 'image/jpeg');
+          break;
+        case 'png':
+          res.setHeader('Content-Type', 'image/png');
+          break;
+        case 'gif':
+          res.setHeader('Content-Type', 'image/gif');
+          break;
+        default:
+          res.setHeader('Content-Type', 'application/octet-stream');
+      }
+      break;
+    }
+    case 'g': {
+      res.setHeader('Content-Type', 'image/gif');
+        break;
+      }
+
+  }
   client.pipe(res);
 
 }
