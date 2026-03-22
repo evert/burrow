@@ -192,7 +192,7 @@ burrow-window {
       background: red;
       color: white;
     }
-    .image {
+    .image, .gif {
       &::before {
         content: "🖼️";
       }

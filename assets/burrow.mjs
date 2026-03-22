@@ -4,6 +4,7 @@ const gopherTypeClassNames = {
   '1': 'directory',
   '3': 'error',
   '7': 'search',
+  'g': 'gif',
   'h': 'html-link',
   'i': 'info',
   'I': 'image',
@@ -153,6 +154,7 @@ async function render(element, gopherType, url) {
       case '7': // search
         renderDirectory(element, await fetchGopherText(url));
         break;
+      case 'g' : // gif
       case 'I' : // image
         const img = document.createElement('img');
         img.src = gopherToProxyUrl(url);
@@ -250,6 +252,7 @@ function renderDirectory(parentElem, content) {
           lineElem.classList.add('title');
         }
         break;
+      case 'g':
       case 'I': {
         const link = document.createElement('a');
         link.href = new URL('gopher://' + host + ':' + port + '/' + type + selector).href;
@@ -261,7 +264,8 @@ function renderDirectory(parentElem, content) {
           parentElem.closest('burrow-window').loadURL(url);
         });
         break;
-      } default:
+      }
+      default:
         lineElem.classList.add('error');
         lineElem.textContent = 'Unsupported gopher type: ' + type;
 
