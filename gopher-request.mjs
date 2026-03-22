@@ -39,6 +39,14 @@ export async function gopherRequest(url, res) {
   const client = createConnection({ port, host }, () => {
     client.write(requestLine + '\r\n');
   });
+  client.on('error', (err) => {
+    console.error('Error connecting to gopher server:', err);
+    res.statusCode = 502;
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify({
+      error: err.message
+    }));
+  });
 
   switch(gopherType) {
     case 'I': {

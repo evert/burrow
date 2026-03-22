@@ -73,6 +73,7 @@ class BurrowWindow extends HTMLElement {
     }
     if (urlObj.port === '70') urlObj.port = '';
 
+    this.currentUrl = urlObj.toString();
     window.history.pushState({}, '', '/#' + urlObj.toString());
     this.addressElem.value = urlObj.toString();
     this.startLoading();
@@ -141,23 +142,31 @@ function gopherToProxyUrl(gopherUrl) {
 
 async function render(element, gopherType, url) {
 
-  switch(gopherType) {
-    case '0': // text file
-      element.textContent = await fetchGopherText(url);
-      break;
-    case '1': // directory
-    case '7': // search
-      renderDirectory(element, await fetchGopherText(url));
-      break;
-    case 'I' : // image
-      const img = document.createElement('img');
-      img.src = gopherToProxyUrl(url);
-      element.replaceChildren(img);
-      break;
+  try {
+    switch(gopherType) {
+      case '0': // text file
+        element.textContent = await fetchGopherText(url);
+        break;
+      case '1': // directory
+      case '7': // search
+        renderDirectory(element, await fetchGopherText(url));
+        break;
+      case 'I' : // image
+        const img = document.createElement('img');
+        img.src = gopherToProxyUrl(url);
+        element.replaceChildren(img);
+        break;
 
-    default:
-      element.textContent = 'Unsupported gopher type: ' + gopherType;
+      default:
+        element.textContent = 'Unsupported gopher type: ' + gopherType;
+    }
+  } catch (err) {
+    const errDiv = document.createElement('div');
+    errDiv.textContent = 'Error loading gopher resource: ' + err.message;
+    errDiv.classList.add('error');
+    element.replaceChildren(errDiv);
   }
+
 
 }
 
