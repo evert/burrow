@@ -24,7 +24,7 @@ new Image('/gopher-frozen.webp');
 class BurrowWindow extends HTMLElement {
 
   loaderElem = null;
-  currentUrl = 'gopher://gopher.floodgap.com/';
+  currentUrl = 'gopher://hole.din.gy/burrow-landing';
   addressElem = null;
 
   constructor() {
