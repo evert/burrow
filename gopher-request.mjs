@@ -31,7 +31,7 @@ export async function gopherRequest(url, res) {
 
   let requestLine = selector;
   if (url.search) {
-    requestLine += '\t' + url.search;
+    requestLine += '\t' + url.search.slice(1);
   }
 
   // console.log('Requesting gopher resource: ' + requestLine + ' from ' + host + ':' + port);

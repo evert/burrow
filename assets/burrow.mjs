@@ -53,7 +53,7 @@ class BurrowWindow extends HTMLElement {
       history.forward();
     });
     this.querySelector('button.home').addEventListener('click', () => {
-      this.loadURL('gopher://hole.din.gy/')
+      this.loadURL('gopher://hole.din.gy/1/burrow-landing');
     });
     this.querySelector('button.reload').addEventListener('click', () => {
       this.loadURL(this.currentUrl);
@@ -146,6 +146,7 @@ async function render(element, gopherType, url) {
       element.textContent = await fetchGopherText(url);
       break;
     case '1': // directory
+    case '7': // search
       renderDirectory(element, await fetchGopherText(url));
       break;
     case 'I' : // image
@@ -194,6 +195,27 @@ function renderDirectory(parentElem, content) {
       }
       case '3': {
         lineElem.textContent = display;
+        break;
+      }
+      case '7': {
+        const form = document.createElement('form');
+        const label = document.createElement('label');
+        label.textContent = display + ': ';
+        const input = document.createElement('input');
+        input.type = 'search';
+        const button = document.createElement('button');
+        button.type = 'submit';
+        button.textContent = 'Go';
+        form.appendChild(label);
+        form.appendChild(input);
+        form.appendChild(button);
+        form.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const gopherUrl = new URL('gopher://' + host + ':' + port + '/7' + selector);
+          gopherUrl.search = input.value;
+          parentElem.closest('burrow-window').loadURL(gopherUrl.toString());
+        });
+        lineElem.appendChild(form);
         break;
       }
       case 'h': {

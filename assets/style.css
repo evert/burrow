@@ -201,6 +201,10 @@ burrow-window {
       &::before {
         content: "🔍";
       }
+      form {
+        display: flex;
+        gap: 4px;
+      }
     }
     .title {
       font-size: 125%;
