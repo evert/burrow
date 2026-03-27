@@ -4,6 +4,9 @@ A browser for the [Gopher](https://en.wikipedia.org/wiki/Gopher_(protocol)) prot
 
 **Demo:** https://burrow.din.gy/
 
+![Burrow screenshot](screenshots/burrow.png)
+
+
 ## Running
 
 This project requires a recent Node.js and a browser. It has 0 dependencies.
